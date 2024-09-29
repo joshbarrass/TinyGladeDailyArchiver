@@ -31,7 +31,7 @@ def get_latest_daily_theme(outdir=None):
     cid = event["cid"]
 
     download_path = download_file(BLOB_URL.format(cid=cid),
-                                  filename=f"{cid}.zip",
+                                  filename=f"{cid}",
                                   outdir=outdir)
 
     if not verify_checksum(download_path):
