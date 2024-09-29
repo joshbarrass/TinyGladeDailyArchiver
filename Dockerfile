@@ -14,3 +14,4 @@ COPY tgdaily/ /code/tgdaily
 RUN pip install -r requirements.txt
 
 ENTRYPOINT ["/usr/local/bin/python3", "/code/archiver.py"]
+CMD ["-h"]
