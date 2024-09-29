@@ -4,7 +4,7 @@
 Tiny Glade Daily Theme Archiver.
 
 Usage:
-  archiver.py [-f] [-O <outdir>] [-l <logfile>] -s
+  archiver.py -s [-f] [-O <outdir>] [-l <logfile>]
 
 Args:
   -s --single             Download the current live daily theme.
