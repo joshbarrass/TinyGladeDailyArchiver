@@ -3,13 +3,17 @@ import requests
 
 # source: https://stackoverflow.com/a/16696317
 # CC BY-SA 4.0 Roman Podlinov
-def download_file(url, filename=None, outdir=None):
+def download_file(url, filename=None, outdir=None, overwrite=False):
     if filename is None:
         filename = url.split('/')[-1]
     if outdir is not None:
         if filename != os.path.basename(filename):
             raise ValueError("filename contains a directory")
         filename = os.path.join(outdir, filename)
+
+    if os.path.exists(filename):
+        if not overwrite or os.path.isdir(filename):
+            raise FileExistsError("filename exists, but overwrite is False")
 
     # NOTE the stream=True parameter below
     with requests.get(url, stream=True) as r:

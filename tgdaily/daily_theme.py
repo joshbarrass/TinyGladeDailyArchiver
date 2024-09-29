@@ -15,7 +15,7 @@ class DailyTheme:
         self.start = start
         self.end = end
 
-def get_latest_daily_theme(outdir=None):
+def get_latest_daily_theme(outdir=None, overwrite=False):
     r = requests.get(EVENTS_URL)
     r.raise_for_status()
     j = r.json()
@@ -32,7 +32,8 @@ def get_latest_daily_theme(outdir=None):
 
     download_path = download_file(BLOB_URL.format(cid=cid),
                                   filename=f"{cid}",
-                                  outdir=outdir)
+                                  outdir=outdir,
+                                  overwrite=overwrite)
 
     if not verify_checksum(download_path):
         raise ChecksumError("bad checksum on downloaded save")

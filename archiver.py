@@ -4,10 +4,11 @@
 Tiny Glade Daily Theme Archiver.
 
 Usage:
-  archiver.py [-O <outdir>] [-l <logfile>] -s
+  archiver.py [-f] [-O <outdir>] [-l <logfile>] -s
 
 Args:
   -s --single             Download the current live daily theme.
+  -f --force              Redownload the theme if it has already been downloaded.
   -O --outdir=<outdir>    Directory to save to [default: .]
   -l --logfile=<logfile>  Log file to record timestamps for downloaded files.
                           Records are stored as the CID followed by the start
@@ -29,8 +30,15 @@ if __name__ == "__main__":
     args = docopt(__doc__)
     print(args)
 
+    overwrite = ("--force" in args and args["--force"])
+
     if "--single" in args and args["--single"]:
-        event = tgdaily.get_latest_daily_theme(outdir=args["--outdir"])
+        try:
+            event = tgdaily.get_latest_daily_theme(outdir=args["--outdir"], overwrite=overwrite)
+        except FileExistsError:
+            print(f"Current daily theme already downloaded.")
+            sys.exit(1)
+
         if "--logfile" in args and args["--logfile"]:
             write_to_logfile(args["--logfile"], event)
         sys.exit(0)
