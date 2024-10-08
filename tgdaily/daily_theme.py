@@ -2,8 +2,8 @@ import requests
 from .checksum import verify_checksum
 from .download import download_file
 
-EVENTS_URL = "https://ryeland.pouncelight.games/v1/events"
-BLOB_URL = "https://ryeland.pouncelight.games/v1/blob/{cid}"
+EVENTS_URL = "http://ryeland.pouncelight.games/v1/events"
+BLOB_URL = "http://ryeland.pouncelight.games/v1/blob/{cid}"
 
 class ChecksumError(Exception):
     pass
