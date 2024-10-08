@@ -63,7 +63,7 @@ if __name__ == "__main__":
             while True:
                 try:
                     event = tgdaily.get_daily_theme_info()
-                except requests.exceptions.ConnectionError:
+                except requests.exceptions.RequestException:
                     print("Error connecting, will try again in 30 minutes")
                     time.sleep(30*60)
                     continue
