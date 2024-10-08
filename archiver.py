@@ -61,7 +61,12 @@ if __name__ == "__main__":
     if "--continuous" in args and args["--continuous"]:
         try:
             while True:
-                event = tgdaily.get_daily_theme_info()
+                try:
+                    event = tgdaily.get_daily_theme_info()
+                except requests.exceptions.ConnectionError:
+                    print("Error connecting, will try again in 30 minutes")
+                    time.sleep(30*60)
+                    continue
                 if not os.path.exists(get_download_path(args, event)):
                     try:
                         event.download(outdir=args["--outdir"], overwrite=False)
