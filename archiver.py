@@ -29,6 +29,7 @@ import os
 import sys
 import time
 import datetime
+import requests
 import tgdaily
 
 def write_to_logfile(logfile, event):
